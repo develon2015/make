@@ -18,8 +18,8 @@ $(Proxy): src
 	codefs=$$(echo $$(find src -regex '.*\.kt$$'))
 	echo 查找源文件 $$codefs
 	echo 生成makefile代理文件$@,内容如下:
-	echo '$(Target): $^' > $@
-	echo '	$(KC) $(CP) -d bin '$$codefs >> $@
+	echo "$(Target): $$codefs" > $@
+	echo "	$(KC) $(CP) -d bin "$$codefs >> $@
 	cat $@
 
 bin:

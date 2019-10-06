@@ -1,2 +1,2 @@
-bin/MainKt.class: src
+bin/MainKt.class: src/Main.kt
 	kc -cp bin -d bin src/Main.kt
