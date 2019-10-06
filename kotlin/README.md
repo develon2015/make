@@ -5,7 +5,7 @@ makefile如何工作
 d@MyServer: ~/git/make/kotlin $ make
 查找源文件 src/Main.kt
 生成makefile代理文件makefile_proxy,内容如下:
-bin/MainKt.class: src
+bin/MainKt.class: src/Main.kt
         kc -cp bin -d bin src/Main.kt
 mkdir bin
 开始构建目标bin/MainKt.class
