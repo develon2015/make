@@ -1,0 +1,2 @@
+bin/exe: src/lib/test/libtest.c src/lib/test2/libtest2.c src/main.c
+	$(CC) -o $@ -I src/lib/test -I src/lib/test2 $^
