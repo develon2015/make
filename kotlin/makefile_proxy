@@ -1,2 +1,10 @@
-bin/MainKt.class: src/Main.kt
-	kc -cp bin -d bin src/Main.kt
+bin/MainKt.class: src/Main.kt src/Logger.kt
+	kc -cp bin -d bin $^
+	touch bin
+
+.PHONY: up
+up: bin
+
+bin: src/Main.kt src/Logger.kt
+	kc -cp bin -d bin $?
+	touch bin
