@@ -1,7 +1,7 @@
 #include "libdynamic_api.h"
 
 int
-main() {
-	libdynamic_symbols()->kotlin.root.foo();
+main(int argc, char *argv[]) {
+	libdynamic_symbols()->kotlin.root.foo(argv[1]);
 	return 0;
 }

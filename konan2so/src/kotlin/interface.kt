@@ -1,3 +1,3 @@
-fun foo() {
-	println("Hello, kotlin native")
+fun foo(name: String?) {
+	println("Hello, $name")
 }

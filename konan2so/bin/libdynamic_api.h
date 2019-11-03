@@ -34,7 +34,7 @@ typedef struct {
   /* User functions. */
   struct {
     struct {
-      void (*foo)();
+      void (*foo)(const char* name);
     } root;
   } kotlin;
 } libdynamic_ExportedSymbols;
