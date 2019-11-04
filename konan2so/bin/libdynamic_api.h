@@ -23,6 +23,12 @@ typedef void*              libdynamic_KNativePtr;
 struct libdynamic_KType;
 typedef struct libdynamic_KType libdynamic_KType;
 
+typedef struct {
+  libdynamic_KNativePtr pinned;
+} libdynamic_kref_User;
+typedef struct {
+  libdynamic_KNativePtr pinned;
+} libdynamic_kref_kotlin_Any;
 
 
 typedef struct {
@@ -35,6 +41,18 @@ typedef struct {
   struct {
     struct {
       void (*foo)(const char* name);
+      struct {
+        libdynamic_KType* (*_type)(void);
+        libdynamic_kref_User (*User)(const char* name, libdynamic_KInt age);
+        const char* (*get_name)(libdynamic_kref_User thiz);
+        libdynamic_KInt (*get_age)(libdynamic_kref_User thiz);
+        libdynamic_KBoolean (*equals)(libdynamic_kref_User thiz, libdynamic_kref_kotlin_Any other);
+        libdynamic_KInt (*hashCode)(libdynamic_kref_User thiz);
+        const char* (*toString)(libdynamic_kref_User thiz);
+        const char* (*component1)(libdynamic_kref_User thiz);
+        libdynamic_KInt (*component2)(libdynamic_kref_User thiz);
+        libdynamic_kref_User (*copy)(libdynamic_kref_User thiz, const char* name, libdynamic_KInt age);
+      } User;
     } root;
   } kotlin;
 } libdynamic_ExportedSymbols;
