@@ -1,0 +1,2 @@
+headers = libtest.h
+compilerOpts = -I src/c/libtest

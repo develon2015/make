@@ -1,31 +1,24 @@
-.ONESHELL:
-SHELL := /bin/bash
-Target := go
-Proxy := makefile_proxy
-KC := kotlin-native
-JK := kotlin-native
-CP := -cp bin
+BIN := ./bin/libtest.so
+EXE := ./a.out
+KLIB := ./bin/libtest.klib
 
+.PHONY: ALL
+ALL: $(BIN) $(EXE)
 
-.PHONY: all
-all: $(Proxy)
-	@
-	echo 开始构建目标$(Target)
-	make -f $<
+$(BIN): $(wildcard src/c/libtest/*.c) | bin
+	@echo 生成libtest.so
+	$(CC) -o $@ -shared $^
 
-$(Proxy): src
-	@
-	codefs=$$(echo $$(find src -regex '.*\.kt$$'))
-	echo 查找源文件 $$codefs
-	echo 生成makefile代理文件$@,内容如下:
-	echo "$(Target): $$codefs" > $@
-	echo "	$(KC) -o "'$$@ $$^' >> $@
-	cat $@
+$(KLIB): libtest.def
+	cinterop -def $^ -o $(KLIB)
 
-.PHONY: run
-run:
-	$(JK) ./$(Target)
+$(EXE): $(wildcard src/kt/**.kt) | $(BIN) $(KLIB)
+	konanc -o $@ $^ -l $(KLIB) -linker-options $(BIN)
+	mv $@.kexe $@
+
+bin:
+	mkdir bin
 
 .PHONY: clean
 clean:
-	rm -rf $(Target) $(Proxy)
+	rm -rf $(BIN) $(EXE) bin
